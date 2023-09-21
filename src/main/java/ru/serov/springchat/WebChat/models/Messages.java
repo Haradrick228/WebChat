@@ -1,11 +1,13 @@
 package ru.serov.springchat.WebChat.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.*;
+import org.hibernate.annotations.CurrentTimestamp;
+
 
 import java.io.Serializable;
 import java.security.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "messages")
@@ -23,37 +25,35 @@ public class Messages implements Serializable {
 //            );
 
     @Id
-    @Column(name = "messages_id")
-    @NotEmpty
+    @Column(name = "message_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int message_id;
 
     @ManyToOne
     @JoinColumn(name = "chat_id")
-    @NotEmpty
     private Chat chat;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @NotEmpty
     private User user;
 
     @Column(name = "context")
-    @NotEmpty
-    @Max(value = 200, message = "Message must less then 200 character")
+    @NotBlank
+    @Size(max = 200, message = "Message must less then 200 character")
     private String context;
 
-    @Column(name = "data_create")
-    private Timestamp data_create;
+    @Column(name = "date_create")
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date data_create;
 
     public Messages() {
     }
 
-    public Messages( Chat chat, User user, String context, Timestamp data_create) {
+    public Messages(Chat chat, User user, String context) {
         this.chat = chat;
         this.user = user;
         this.context = context;
-        this.data_create = data_create;
     }
 
     public int getMessage_id() {
@@ -85,14 +85,15 @@ public class Messages implements Serializable {
     }
 
     public void setContext(String context) {
+        System.out.println("Дина текста " + context.length());
         this.context = context;
     }
 
-    public Timestamp getData_create() {
+    public Date getData_create() {
         return data_create;
     }
 
-    public void setData_create(Timestamp data_create) {
+    public void setData_create(Date data_create) {
         this.data_create = data_create;
     }
 }

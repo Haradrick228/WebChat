@@ -2,6 +2,9 @@ package ru.serov.springchat.WebChat.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
+
 
 @Entity
 @Table(name = "chat_participants")
@@ -20,13 +23,10 @@ public class ChatParticipants {
     @Column(name = "party_id")
     private int party_id;
 
-
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

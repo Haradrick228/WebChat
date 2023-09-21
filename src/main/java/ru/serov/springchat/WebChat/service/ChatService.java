@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.serov.springchat.WebChat.models.*;
 import ru.serov.springchat.WebChat.repositories.*;
 
+import java.util.Date;
+
 
 @Service
 public class ChatService {
@@ -46,6 +48,7 @@ public class ChatService {
         messages.setChat(chat);
         messages.setContext("Some context");
         messages.setUser(user);
+        messages.setData_create(new Date());
         messagesRepository.save(messages);
 
         MessageStatus messageStatus = new MessageStatus();

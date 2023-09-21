@@ -2,6 +2,8 @@ package ru.serov.springchat.WebChat.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "message_status")
@@ -18,18 +20,16 @@ public class MessageStatus {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "massage_id")
-    @NotEmpty
+    @JoinColumn(name = "message_id")
     private Messages message;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @NotEmpty
     private User user;
 
     @Column(name = "is_read")
-    @NotEmpty
+    @NotNull
     private boolean is_read;
 
     public MessageStatus() {

@@ -1,9 +1,12 @@
 package ru.serov.springchat.WebChat.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.Cascade;
+
 
 import java.util.List;
 
@@ -19,18 +22,17 @@ public class User {
 //);
     @Id
     @Column(name = "user_id")
-    @NotEmpty
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
 
     @Column(name = "username", unique = true)
     @Size(min = 1, max = 30, message = "Username must have 1-30 character")
-    @NotEmpty
+    @NotBlank
     private String username;
 
     @Column(name = "password")
     @Size(min = 1, max = 30, message = "Password must have 1-30 character")
-    @NotEmpty
+    @NotBlank
     private String password;
 
     @OneToMany(mappedBy = "user")

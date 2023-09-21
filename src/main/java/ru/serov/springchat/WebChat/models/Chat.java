@@ -1,10 +1,14 @@
 package ru.serov.springchat.WebChat.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+
 import java.util.List;
+
 
 @Entity
 @Table(name = "chat")
@@ -19,16 +23,14 @@ public class Chat {
 
     @Id
     @Column(name = "chat_id")
-    @NotEmpty
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int chat_id;
 
     @Column(name = "name")
-    @NotEmpty
+    @NotBlank
     @Size(min = 1, max = 30, message = "Min size is 1, max size is 30")
     private String name;
 
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
