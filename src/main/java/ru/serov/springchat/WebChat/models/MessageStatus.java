@@ -1,5 +1,6 @@
 package ru.serov.springchat.WebChat.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -20,11 +21,13 @@ public class MessageStatus {
 
     @Id
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "message_id")
     private Messages message;
 
     @Id
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "user_id")
     private User user;
 

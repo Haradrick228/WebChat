@@ -1,5 +1,6 @@
 package ru.serov.springchat.WebChat.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -24,10 +25,12 @@ public class ChatParticipants {
     private int party_id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "user_id")
     private User user;
 

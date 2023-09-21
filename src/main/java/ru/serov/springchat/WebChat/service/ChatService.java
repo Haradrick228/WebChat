@@ -6,6 +6,7 @@ import ru.serov.springchat.WebChat.models.*;
 import ru.serov.springchat.WebChat.repositories.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -27,6 +28,12 @@ public class ChatService {
         this.messageStatusRepository = messageStatusRepository;
         this.userRepository = userRepository;
     }
+
+    public List<User> getUser(){
+      return userRepository.findAll();
+    };
+
+
 
     public void addInfoToChat(){
         User user = new User();
@@ -57,6 +64,8 @@ public class ChatService {
         messageStatus.setIs_read(true);
         messageStatusRepository.save(messageStatus);
     }
+
+
 }
 
 

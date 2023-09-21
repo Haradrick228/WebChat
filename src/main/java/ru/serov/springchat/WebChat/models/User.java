@@ -1,5 +1,7 @@
 package ru.serov.springchat.WebChat.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -36,6 +38,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Chat> chats;
 

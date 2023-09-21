@@ -1,5 +1,6 @@
 package ru.serov.springchat.WebChat.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.hibernate.annotations.CurrentTimestamp;
@@ -30,10 +31,12 @@ public class Messages implements Serializable {
     private int message_id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "user_id")
     private User user;
 
